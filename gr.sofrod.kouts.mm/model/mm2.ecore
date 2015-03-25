@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="mm2" nsURI="http://www.example.org/mm2" nsPrefix="mm2">
+  <eClassifiers xsi:type="ecore:EClass" name="NamedElement" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Koutsoumpi" eSuperTypes="#//NamedElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="spitia" upperBound="-1"
+        eType="#//Spiti"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Spiti" eSuperTypes="#//NamedElement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Kosmos">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="koutsoumpia" upperBound="-1"
+        eType="#//Koutsoumpi" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="spitia" upperBound="-1"
+        eType="#//Spiti" containment="true"/>
+  </eClassifiers>
+</ecore:EPackage>
