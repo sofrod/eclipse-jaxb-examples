@@ -1,4 +1,4 @@
-package test;
+package gr.sofrod.examples.jaxb;
 
 import java.io.File;
 import java.io.FileReader;
@@ -13,7 +13,7 @@ import javax.xml.bind.Unmarshaller;
 import de.vogella.xml.jaxb.model.Book;
 import de.vogella.xml.jaxb.model.Bookstore;
 
-public class BookMain {
+public class BookstoreMain {
 
   private static final String BOOKSTORE_XML = "./bookstore-jaxb.xml";
 

@@ -6,17 +6,29 @@ import java.util.ArrayList;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
+import javax.xml.bind.Unmarshaller;
 
+import org.apache.log4j.ConsoleAppender;
+import org.apache.log4j.Logger;
+import org.apache.log4j.PatternLayout;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import gr.sofrod.examples.jaxb.beans.Family;
 import gr.sofrod.examples.jaxb.beans.Person;
 
 public class JaxbTest_001 {
+	Logger logger = Logger.getLogger(JaxbTest_001.class);
+	
+	@BeforeClass
+	public static void init() {
+		ConsoleAppender ca = new ConsoleAppender(new PatternLayout("%5p: %m%n"));
+		Logger.getRootLogger().addAppender(ca);
+	}
 
 	@SuppressWarnings("serial")
 	@Test
-	public void testFamily() throws JAXBException {
+	public void testCreateFamily() throws JAXBException {
 		
 		final Person p1  = new Person();
 		p1.setName("Lalakis");
@@ -43,12 +55,10 @@ public class JaxbTest_001 {
 
 	    // Write to File
 	    m.marshal(f, new File("files/family.xml"));
-
-		
 	}
 
 	@Test
-	public void testPerson() throws JAXBException {
+	public void testCreatePerson() throws JAXBException {
 		Person p  = new Person();
 		p.setName("Lalakis");
 		p.setAge(25);
@@ -62,6 +72,31 @@ public class JaxbTest_001 {
 		
 		// Write to File
 		m.marshal(p, new File("files/person.xml"));
+	}
+	
+	@Test
+	public void testReadPerson() throws JAXBException {
+		JAXBContext context = JAXBContext.newInstance(Person.class);
+		Unmarshaller um = context.createUnmarshaller();
+		
+		Person p = (Person) um.unmarshal(new File("files/person.xml"));
+		logger.info("name=" + p.getName());
+		logger.info(" age=" + p.getAge());
+	}
+	
+	@Test
+	public void testReadFamily() throws JAXBException {
+		JAXBContext context = JAXBContext.newInstance(Person.class);
+		Unmarshaller um = context.createUnmarshaller();
+		
+		Family f = (Family) um.unmarshal(new File("files/family.xml"));
+		logger.info("surname=" + f.getSurname());
+		
+		for (Person p : f.getChildren() ) {
+			logger.info("Child");
+			logger.info("name=" + p.getName());
+			logger.info(" age=" + p.getAge());
+		}
 	}
 	
 }
