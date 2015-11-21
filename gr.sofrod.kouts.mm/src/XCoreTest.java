@@ -23,10 +23,12 @@ public class XCoreTest {
 		System.out.println("lala");
 	}
 	
+	@SuppressWarnings("unused")
 	private void method3() {
 		System.out.println("lala");
 	}
 	
+	@SuppressWarnings("unused")
 	private void method2() {
 		System.out.println("lala");
 		System.out.println("lala");
